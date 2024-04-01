@@ -1,3 +1,4 @@
 *.mp4
-*.pt
-./test-images
+models/
+test-images/
+flagged/
