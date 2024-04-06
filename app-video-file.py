@@ -2,7 +2,7 @@ import numpy as np
 import supervision as sv
 from ultralytics import YOLO
 
-model = YOLO("./models/yolov8m.pt", task="detect")
+model = YOLO("./models/yolov8n.pt", task="detect")
 tracker = sv.ByteTrack()
 box_annotator = sv.BoundingBoxAnnotator()
 label_annotator = sv.LabelAnnotator()
@@ -26,7 +26,7 @@ def callback(frame: np.ndarray, _: int) -> np.ndarray:
 
 
 sv.process_video(
-    source_path=0,
+    source_path="./data/CCTV B.205- 03-04-2024/Camera5_MESIN-08_MESIN-08_20240403191448_20240403193058_898192.mp4",
     target_path="result.mp4",
     callback=callback,
 )
