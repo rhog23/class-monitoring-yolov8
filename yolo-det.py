@@ -6,18 +6,18 @@ model = YOLO("./models/yolov8n.pt", task="detect")
 
 
 cap = cv2.VideoCapture(0)
-cap.set(3, 224)
-cap.set(4, 224)
+cap.set(3, 192)
+cap.set(4, 192)
 
 while True:
     success, frame = cap.read()
 
-    results = model(frame, imgsz=224)
+    results = model(frame, imgsz=128)
 
     for result in results:
         box = result.boxes
         coords = box.xyxy
-        if len(coords) > 1:
+        if len(coords) >= 1:
             x = int(coords[0][0])
             y = int(coords[0][1])
             w = int(coords[0][2])

@@ -7,13 +7,13 @@ from torchvision import transforms
 from ultralytics import YOLO
 
 print(f"[INFO] 🔵 Loading model ...")
-model = YOLO("models/yolov8n.pt", task="detect")
+model = YOLO("models/human-det.pt", task="detect")
 print(f"[INFO] 🟢 Model successfully loaded")
-fnt = ImageFont.truetype("arial.ttf", 40)
+fnt = ImageFont.truetype("arial.ttf", 12)
 
 
 def predict(inp):
-    prediction = model(inp)[0]
+    prediction = model(inp, classes=0)[0]
     draw = ImageDraw.Draw(inp)
 
     for label, conf, box in zip(
@@ -22,7 +22,7 @@ def predict(inp):
         draw.rectangle(box.type(torch.int).tolist(), outline=(255, 0, 0), width=2)
         draw.text(
             tuple((int(box[0]), int(box[1]))),
-            f"{prediction.names[label.item()]} {conf:.3%}",
+            f"{prediction.names[label.item()]} {conf:.1%}",
             font=fnt,
             fill=(0, 0, 0),
         )
