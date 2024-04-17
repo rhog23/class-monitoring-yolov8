@@ -1,0 +1,6 @@
+{
+    "experiment_01": {
+        "fastNlMeansDenoisingColored": "(frame, None, 3, 3, 3, 3)",
+        "bilateralFilter": "(frame, 9, 20, 20)"
+    }
+}

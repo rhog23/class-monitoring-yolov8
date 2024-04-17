@@ -6,7 +6,7 @@ from skimage.filters import unsharp_mask
 
 model = YOLO("./models/yolov8n.onnx", task="detect")
 
-video_path = "data/Camera5_MESIN-08_MESIN-08_20240403191448_20240403193058_898192.mp4"
+video_path = "data/20240321213000-20240321215500/Camera14_MESIN-04_MESIN-04_20240321213000_20240321215500_2937239.mp4"
 
 cap = cv2.VideoCapture(video_path)
 clahe_model = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(3, 3))
