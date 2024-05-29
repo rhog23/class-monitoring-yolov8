@@ -7,13 +7,13 @@ from torchvision import transforms
 from ultralytics import YOLO
 
 print(f"[INFO] 🔵 Loading model ...")
-model = YOLO("models/human-det.pt", task="detect")
+model = YOLO("models/yolov8n.pt", task="detect")
 print(f"[INFO] 🟢 Model successfully loaded")
 fnt = ImageFont.truetype("arial.ttf", 12)
 
 
 def predict(inp):
-    prediction = model(inp, classes=0)[0]
+    prediction = model(inp, classes=0, stream=True)[0]
     draw = ImageDraw.Draw(inp)
 
     for label, conf, box in zip(
@@ -30,8 +30,18 @@ def predict(inp):
     return inp
 
 
-gr.Interface(
-    fn=predict,
-    inputs=gr.Image(type="pil"),
-    outputs=gr.Image(type="pil"),
-).launch()
+def video_identity(video):
+    return video
+
+
+demo = gr.Interface(predict, gr.Video(), "playable_video")
+
+
+# gr.Interface(
+#     fn=predict,
+#     inputs=gr.Image(type="pil"),
+#     outputs=gr.Image(type="pil"),
+# ).launch()
+
+if __name__ == "__main__":
+    demo.launch()
